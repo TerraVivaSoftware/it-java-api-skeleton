@@ -1,6 +1,7 @@
 package com.ciandt.skeleton.repository;
 
 import com.ciandt.skeleton.core.domain.Comment;
+import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +12,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
+
+  /**
+   * Finds a {@link Comment} by UUID.
+   * @param uuid {@link UUID}
+   * @return Comment
+   */
+  Comment findOneByUuid(UUID uuid);
 
 }

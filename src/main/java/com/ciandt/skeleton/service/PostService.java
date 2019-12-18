@@ -2,6 +2,7 @@ package com.ciandt.skeleton.service;
 
 import com.ciandt.skeleton.core.domain.Post;
 import com.ciandt.skeleton.repository.PostResporitory;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,15 +26,15 @@ public class PostService {
   }
 
   /**
-   * Returns whether an entity with the given id exists.
-   * @param code
+   * Returns whether an entity with the given {@link UUID} exists.
+   * @param uuid {@link UUID}
    * @return {@literal true} if an entity with the given id exists, {@literal false} otherwise.
    */
-  public boolean exists(Long code) {
-    if (code == null || code <= 0L) {
+  public boolean exists(UUID uuid) {
+    if (uuid == null) {
       return false;
     }
-    return this.postResporitory.existsById(code);
+    return this.postResporitory.existsPostByUuid(uuid);
   }
 
   /**

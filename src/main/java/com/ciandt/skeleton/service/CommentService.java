@@ -2,6 +2,7 @@ package com.ciandt.skeleton.service;
 
 import com.ciandt.skeleton.core.domain.Comment;
 import com.ciandt.skeleton.repository.CommentRepository;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +26,12 @@ public class CommentService {
   }
 
   /**
-   * Finds a {@link Comment} by id.
-   * @param code
-   * @return
+   * Finds a {@link Comment} by UUID.
+   * @param uuid {@link UUID}
+   * @return Comment
    */
-  public Comment findById(Long code) {
-    return this.commentRepository.getOne(code);
+  public Comment findByUuid(UUID uuid) {
+    return this.commentRepository.findOneByUuid(uuid);
   }
 
   /**
@@ -63,11 +64,12 @@ public class CommentService {
 
   /**
    * Deletes a {@link Comment}.
-   * @param code
+   * @param uuid {@link UUID}
    */
   @Transactional
-  public void delete(Long code) {
-    this.commentRepository.deleteById(code);
+  public void delete(UUID uuid) {
+    Comment comment = this.findByUuid(uuid);
+    this.commentRepository.delete(comment);
   }
 
 }

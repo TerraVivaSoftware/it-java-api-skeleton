@@ -1,7 +1,7 @@
 package com.ciandt.skeleton.web.rest.v1.assembler;
 
 import com.ciandt.skeleton.core.domain.Comment;
-import com.ciandt.skeleton.web.rest.v1.resource.CommentResource;
+import com.ciandt.skeleton.web.rest.v1.resource.CommentCreateResource;
 import com.vidolima.copypropertiesassembler.GenericAssembler;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
  * @since Jul 31, 2019
  */
 @Component
-public class CommentAssembler extends GenericAssembler<Comment, CommentResource> {
+public class CommentAssembler extends GenericAssembler<Comment, CommentCreateResource> {
 
   public CommentAssembler() {
-    super(Comment.class, CommentResource.class);
+    super(Comment.class, CommentCreateResource.class);
   }
 
 }

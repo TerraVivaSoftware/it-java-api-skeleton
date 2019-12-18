@@ -2,6 +2,7 @@ package com.ciandt.skeleton.core.business;
 
 import com.ciandt.skeleton.core.domain.Post;
 import com.ciandt.skeleton.service.PostService;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,11 +66,11 @@ public class PostBusiness {
   }
 
   /**
-   * Cheks if the given {@link Post} exist.
-   * @param postId
+   * Checks if the given {@link Post} exist.
+   * @param uuid {@link UUID}
    */
-  public void checkExist(Long postId) {
-    if (!this.postService.exists(postId)) {
+  public void checkExist(UUID uuid) {
+    if (!this.postService.exists(uuid)) {
       throw new IllegalArgumentException("The given Post does not exist.");
     }
   }

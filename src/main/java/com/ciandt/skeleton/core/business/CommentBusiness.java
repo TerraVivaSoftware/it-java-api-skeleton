@@ -2,6 +2,7 @@ package com.ciandt.skeleton.core.business;
 
 import com.ciandt.skeleton.core.domain.Comment;
 import com.ciandt.skeleton.service.CommentService;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,36 +29,35 @@ public class CommentBusiness {
 
   /**
    * Creates a {@link Comment}.
-   * @param postId
-   * @param comment
+   * @param postUuid {@link UUID}
+   * @param comment {@link Comment}
    * @return comment
    */
   @Transactional
-  public Comment create(Long postId, Comment comment) {
-    this.postBusiness.checkExist(postId);
+  public Comment create(UUID postUuid, Comment comment) {
+    this.postBusiness.checkExist(postUuid);
     return this.commentService.create(comment);
   }
 
   /**
    * Updates a {@link Comment}.
-   * @param code
    * @param comment
    * @return comment
    */
   @Transactional
-  public Comment update(Long code, Comment comment) {
-    Comment tobeUpdated = this.commentService.findById(code);
+  public Comment update(UUID uuid, Comment comment) {
+    Comment tobeUpdated = this.commentService.findByUuid(uuid);
     tobeUpdated.applyUpdate(comment);
     return this.commentService.update(tobeUpdated);
   }
 
   /**
    * Deletes a {@link Comment}.
-   * @param code
+   * @param uuid {@link UUID}
    */
   @Transactional
-  public void delete(Long code) {
-    this.commentService.delete(code);
+  public void delete(UUID uuid) {
+    this.commentService.delete(uuid);
   }
 
 }
