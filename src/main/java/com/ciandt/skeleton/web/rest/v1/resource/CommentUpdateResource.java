@@ -7,6 +7,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * This is the {@link Comment}'s resource representation for update.
@@ -17,6 +18,7 @@ import lombok.Data;
  * @since Dez 18, 2019
  */
 @Data
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CommentUpdateResource {
   private UUID uuid;

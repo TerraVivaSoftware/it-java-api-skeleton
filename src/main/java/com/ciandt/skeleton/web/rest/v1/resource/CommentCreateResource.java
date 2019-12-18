@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * This is the {@link Comment}'s resource representation for creation.
@@ -19,6 +20,7 @@ import lombok.Data;
  * @since Jul 29, 2019
  */
 @Data
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CommentCreateResource {
   private UUID uuid;
