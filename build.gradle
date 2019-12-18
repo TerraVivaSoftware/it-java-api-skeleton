@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.7.RELEASE'
+		springBootVersion = '2.2.2.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -8,7 +8,7 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		// https://mvnrepository.com/artifact/org.owasp/dependency-check-gradle
-		classpath "org.owasp:dependency-check-gradle:5.2.1"
+		classpath "org.owasp:dependency-check-gradle:5.2.4"
 	}
 }
 
@@ -34,7 +34,7 @@ ext {
 	springCloudVersion = 'Greenwich.RELEASE'
 }
 
-ext['tomcat.version'] = '9.0.24'
+ext['tomcat.version'] = '9.0.30'
 
 dependencies {
 
@@ -44,7 +44,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
 	runtime('org.springframework.boot:spring-boot-devtools')
 
-	compile('com.h2database:h2:1.4.199')
+	compile('com.h2database:h2:1.4.200')
 
 	// Utils
 	compile 'com.vidolima:copy-properties-assembler:v1.0.0'
@@ -62,7 +62,7 @@ dependencies {
 	// tests
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
-	testCompile('com.h2database:h2:1.4.199')
+	testCompile('com.h2database:h2:1.4.200')
 }
 
 dependencyManagement {
