@@ -2,12 +2,10 @@ package com.ciandt.skeleton.web.rest.v1.resource;
 
 import com.ciandt.skeleton.core.domain.Post;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
 import java.util.UUID;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,11 +22,8 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PostResource {
   private UUID uuid;
-//  @NotNull
-//  private UserResource author; // TODO: nao devo passar no front
-//  @NotEmpty
-//  @Min(value = 50)
-//  @Max(value = 400)
+  @NotEmpty
+  @Min(value = 50)
+  @Max(value = 400)
   private String text;
-  private Date publishedAt; // TODO: nao devo passar no front
 }
