@@ -58,6 +58,10 @@ public class PostService {
    */
   @Transactional
   public Post create(Post post) {
+    // check "code" to ensure a creation (this is a infra check not a business validation).
+    if (post.getCode() != null) {
+      throw new IllegalArgumentException("This comment could not be created. The comment already have a code.");
+    }
     return this.postResporitory.save(post);
   }
 
@@ -68,6 +72,10 @@ public class PostService {
    */
   @Transactional
   public Post update(Post post) {
+    // check "code" to ensure an update (this is a infra check not a business validation).
+    if (post.getCode() == null) {
+      throw new IllegalArgumentException("This comment could not be updated. The comment have no code.");
+    }
     return this.postResporitory.save(post);
   }
 
