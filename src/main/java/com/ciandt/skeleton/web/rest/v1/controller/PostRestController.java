@@ -6,6 +6,8 @@ import com.ciandt.skeleton.web.rest.v1.assembler.PostAssembler;
 import com.ciandt.skeleton.web.rest.v1.resource.PostResource;
 import java.util.UUID;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,7 +41,7 @@ public class PostRestController extends RestControllerBase {
    * @return ResponseEntity {@link PostResource}
    */
   @GetMapping(path = "/posts/{uuid}")
-  public ResponseEntity get(@PathVariable UUID uuid) {
+  public ResponseEntity get(@PathVariable  UUID uuid) {
     Post post = this.postBusiness.findPostByUuid(uuid);
     return ResponseEntity.ok(this.postAssembler.fromDomain(post));
   }
@@ -60,7 +62,7 @@ public class PostRestController extends RestControllerBase {
    * @return ResponseEntity {@link PostResource}
    */
   @PutMapping(path = "/posts/{uuid}")
-  public ResponseEntity update(@PathVariable UUID uuid, @Valid @RequestBody PostResource resource) {
+  public ResponseEntity update(@PathVariable UUID uuid, @RequestBody @Valid PostResource resource) {
     resource.setUuid(uuid);
     Post domain = this.postAssembler.fromResource(resource);
     Post post = this.postBusiness.update(domain);
@@ -71,8 +73,9 @@ public class PostRestController extends RestControllerBase {
    * Deletes a {@link Post}.
    */
   @DeleteMapping(path = "/posts/{uuid}")
-  public void delete(@PathVariable UUID uuid) {
+  public ResponseEntity delete(@PathVariable UUID uuid) {
     this.postBusiness.delete(uuid);
+    return ResponseEntity.noContent().build();
   }
 
 }

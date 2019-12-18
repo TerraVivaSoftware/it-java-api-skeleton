@@ -3,8 +3,6 @@ package com.ciandt.skeleton.web.rest.v1.resource;
 import com.ciandt.skeleton.core.domain.Post;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.UUID;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
