@@ -2,12 +2,10 @@ package com.ciandt.skeleton.web.rest.v1.resource;
 
 import com.ciandt.skeleton.core.domain.Comment;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
 import java.util.UUID;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
