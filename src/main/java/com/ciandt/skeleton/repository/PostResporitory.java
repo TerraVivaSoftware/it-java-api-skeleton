@@ -20,4 +20,10 @@ public interface PostResporitory extends JpaRepository<Post, Long> {
    */
   boolean existsPostByUuid(UUID uuid);
 
+  /**
+   * Finds a {@link Post} by {@link UUID}.
+   * @param uuid {@link UUID}
+   * @return {@link Post}
+   */
+  Post findOnePostByUuid(UUID uuid);
 }

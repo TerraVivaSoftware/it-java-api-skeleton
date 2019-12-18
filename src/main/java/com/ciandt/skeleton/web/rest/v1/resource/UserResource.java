@@ -3,6 +3,7 @@ package com.ciandt.skeleton.web.rest.v1.resource;
 import com.ciandt.skeleton.core.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * This is the {@link User}'s resource representation.
@@ -13,6 +14,7 @@ import lombok.Data;
  * @since Jul 29, 2019
  */
 @Data
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserResource {
   private String login;

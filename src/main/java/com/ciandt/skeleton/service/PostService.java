@@ -3,6 +3,7 @@ package com.ciandt.skeleton.service;
 import com.ciandt.skeleton.core.domain.Post;
 import com.ciandt.skeleton.repository.PostResporitory;
 import java.util.UUID;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,12 +39,16 @@ public class PostService {
   }
 
   /**
-   * Finds a {@link Post} by id (code).
-   * @param code
-   * @return post
+   * Finds a {@link Post} by {@link UUID}.
+   * @param uuid {@link UUID}
+   * @return {@link Post}
    */
-  public Post findById(Long code) {
-    return this.postResporitory.getOne(code);
+  public Post findByUuid(UUID uuid) {
+    Post post = this.postResporitory.findOnePostByUuid(uuid);
+    if (post == null) {
+      throw new EntityNotFoundException("No 'Post' found with uuid " + uuid);
+    }
+    return post;
   }
 
   /**
@@ -68,10 +73,11 @@ public class PostService {
 
   /**
    * Deletes a {@link Post}.
-   * @param post
+   * @param uuid
    */
   @Transactional
-  public void delete(Post post) {
+  public void delete(UUID uuid) {
+    Post post = this.findByUuid(uuid);
     this.postResporitory.delete(post);
   }
 

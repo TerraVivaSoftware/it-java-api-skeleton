@@ -26,12 +26,12 @@ public class PostBusiness {
   }
 
   /**
-   * Finds a {@link Post} by id (code).
-   * @param code
-   * @return post
+   * Finds a {@link Post} by {@link UUID}.
+   * @param uuid {@link UUID}
+   * @return post {@link Post}
    */
-  public Post findPostById(Long code) {
-    return this.postService.findById(code);
+  public Post findPostByUuid(UUID uuid) {
+    return postService.findByUuid(uuid);
   }
 
   /**
@@ -58,11 +58,11 @@ public class PostBusiness {
 
   /**
    * Deletes a {@link Post}.
-   * @param post
+   * @param uuid
    */
   @Transactional
-  public void delete(Post post) {
-    this.postService.delete(post);
+  public void delete(UUID uuid) {
+    this.postService.delete(uuid);
   }
 
   /**
