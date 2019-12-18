@@ -66,7 +66,7 @@ public class Comment {
    * Updates the current Comment with the new values.
    * @param comment
    */
-  public void applyUpdate(final Comment comment) {
+  public void applyValues(final Comment comment) {
     this.text = comment.getText();
   }
 

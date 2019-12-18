@@ -52,8 +52,9 @@ public class PostBusiness {
    */
   @Transactional
   public Post update(Post post) {
-    // TODO: validations?
-    return this.postService.update(post);
+    Post postToBeUpdated = this.findPostByUuid(post.getUuid());
+    postToBeUpdated.applyValues(post);
+    return this.postService.update(postToBeUpdated);
   }
 
   /**

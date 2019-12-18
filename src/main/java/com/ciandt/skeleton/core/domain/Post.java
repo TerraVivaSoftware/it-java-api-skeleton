@@ -61,4 +61,11 @@ public class Post {
     this.uuid = UUID.randomUUID();
   }
 
+  /**
+   * Updates the current Comment with the new values.
+   * @param post
+   */
+  public void applyValues(final Post post) {
+    this.setText(post.getText());
+  }
 }

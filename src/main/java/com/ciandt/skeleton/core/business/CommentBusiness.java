@@ -47,7 +47,7 @@ public class CommentBusiness {
   @Transactional
   public Comment update(UUID uuid, Comment comment) {
     Comment tobeUpdated = this.commentService.findByUuid(uuid);
-    tobeUpdated.applyUpdate(comment);
+    tobeUpdated.applyValues(comment);
     return this.commentService.update(tobeUpdated);
   }
 
