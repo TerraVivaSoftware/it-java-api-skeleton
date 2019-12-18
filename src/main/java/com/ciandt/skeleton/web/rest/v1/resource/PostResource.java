@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * This is the {@link Post}'s resource representation.
@@ -23,7 +24,6 @@ import lombok.NoArgsConstructor;
 public class PostResource {
   private UUID uuid;
   @NotEmpty
-  @Min(value = 50)
-  @Max(value = 400)
+  @Length(min = 50, max = 300)
   private String text;
 }
