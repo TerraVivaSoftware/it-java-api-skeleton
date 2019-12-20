@@ -23,5 +23,5 @@ public class PostResource {
   private UUID uuid;
   @NotEmpty
   @Length(min = 50, max = 300)
-  private String text;
+  private String content;
 }
