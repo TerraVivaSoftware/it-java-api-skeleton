@@ -1,7 +1,10 @@
 package com.ciandt.skeleton.core.business;
 
+import com.ciandt.skeleton.core.domain.Comment;
 import com.ciandt.skeleton.core.domain.Post;
+import com.ciandt.skeleton.core.exception.BusinessException;
 import com.ciandt.skeleton.service.PostService;
+import java.util.Collection;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,10 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostBusiness {
 
   private PostService postService;
+  private CommentBusiness commentBusiness;
 
   @Autowired
-  public PostBusiness(PostService postService) {
+  public PostBusiness(PostService postService, CommentBusiness commentBusiness) {
     this.postService = postService;
+    this.commentBusiness = commentBusiness;
   }
 
   /**
@@ -62,7 +67,10 @@ public class PostBusiness {
    * @param uuid
    */
   @Transactional
-  public void delete(UUID uuid) {
+  public void delete(UUID uuid) throws BusinessException {
+    if (this.hasComments(uuid)) {
+      throw new BusinessException("The Post " + uuid + " has associated comments end cannot be removed.");
+    }
     this.postService.delete(uuid);
   }
 
@@ -72,8 +80,18 @@ public class PostBusiness {
    */
   public void checkExist(UUID uuid) {
     if (!this.postService.exists(uuid)) {
-      throw new IllegalArgumentException("The given Post does not exist.");
+      throw new IllegalArgumentException("The Post " + uuid + " does not exist.");
     }
+  }
+
+  /**
+   * Checks if the {@link Post} has any {@link Comment}.
+   * @param uuid {@link UUID}
+   * @return true if has comment
+   */
+  public boolean hasComments(UUID uuid) {
+    Collection<Comment> comments = this.commentBusiness.findAllByPost(uuid);
+    return !comments.isEmpty();
   }
 
 }
