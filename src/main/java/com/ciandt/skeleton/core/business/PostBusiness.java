@@ -7,6 +7,7 @@ import com.ciandt.skeleton.service.PostService;
 import java.util.Collection;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +26,7 @@ public class PostBusiness {
   private CommentBusiness commentBusiness;
 
   @Autowired
-  public PostBusiness(PostService postService, CommentBusiness commentBusiness) {
+  public PostBusiness(PostService postService, @Lazy CommentBusiness commentBusiness) {
     this.postService = postService;
     this.commentBusiness = commentBusiness;
   }
