@@ -42,8 +42,6 @@ CI&amp;T IT's default Java project skeleton for Microservices and APIs (with bas
 
 **com.ciandt.skeleton.web.rest.v1.resource**
 
-**com.ciandt.skeleton.web.rest.v1.assembler**
-
 **com.ciandt.skeleton.web.rest.v1.controller**
 
 
