@@ -42,11 +42,14 @@ public class Post {
   private UUID uuid;
 
   @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(unique = true, updatable = false)
+  @JoinColumn(updatable = false)
   private User author;
 
-  @Column(name = "POST_TX_POST")
-  private String text;
+  @Column(name = "POST_TX_TITLE")
+  private String title;
+
+  @Column(name = "POST_TX_CONTENT")
+  private String content;
 
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
@@ -66,6 +69,7 @@ public class Post {
    * @param post
    */
   public void applyValues(final Post post) {
-    this.setText(post.getText());
+    this.setContent(post.getContent());
+    this.setTitle(post.getTitle());
   }
 }

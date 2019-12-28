@@ -1,7 +1,9 @@
 package com.ciandt.skeleton.service;
 
 import com.ciandt.skeleton.core.domain.Comment;
+import com.ciandt.skeleton.core.domain.Post;
 import com.ciandt.skeleton.repository.CommentRepository;
+import java.util.Collection;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,4 +74,12 @@ public class CommentService {
     this.commentRepository.delete(comment);
   }
 
+  /**
+   * Finds all {@link Comment}s from a {@link Post}.
+   * @param post {@link UUID}
+   * @return collection of {@link Comment}
+   */
+  public Collection<Comment> findAllByPost(final Post post) {
+    return this.commentRepository.findAllByPostCode(post.getCode());
+  }
 }

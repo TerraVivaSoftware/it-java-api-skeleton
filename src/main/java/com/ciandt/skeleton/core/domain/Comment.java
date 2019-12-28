@@ -40,7 +40,7 @@ public class Comment {
   private UUID uuid;
 
   @ManyToOne
-  @JoinColumn(name = "USER_TX_LOGIN", referencedColumnName = "USER_TX_LOGIN", nullable = false, updatable = false)
+  @JoinColumn(name = "USER_TX_LOGIN", referencedColumnName = "USER_TX_LOGIN", updatable = false)
   private User author;
 
   @CreationTimestamp
@@ -48,8 +48,11 @@ public class Comment {
   @Column(name = "COMM_DT_CREATE", updatable = false)
   private Date publishedAt;
 
-  @Column(name = "COMM_TX_TEXT")
-  private String text;
+  @Column(name = "COMM_TX_CONTENT")
+  private String content;
+
+  @Column(name = "POST_CD_POST")
+  private Long postCode;
 
   @PrePersist
   public void prePersist() {
@@ -67,7 +70,7 @@ public class Comment {
    * @param comment
    */
   public void applyValues(final Comment comment) {
-    this.text = comment.getText();
+    this.setContent(comment.getContent());
   }
 
 }
