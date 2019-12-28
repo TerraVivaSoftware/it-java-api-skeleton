@@ -1,7 +1,9 @@
 package com.ciandt.skeleton.core.business;
 
 import com.ciandt.skeleton.core.domain.Comment;
+import com.ciandt.skeleton.core.domain.Post;
 import com.ciandt.skeleton.service.CommentService;
+import java.util.Collection;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +30,17 @@ public class CommentBusiness {
   }
 
   /**
+   * Finds all {@link Comment}s from a {@link Post}.
+   * @param postUuid {@link UUID}
+   * @return collection of {@link Comment}
+   */
+  public Collection<Comment> findAllByPost(UUID postUuid) {
+    Post post = this.postBusiness.findPostByUuid(postUuid);
+    Collection<Comment> comments = this.commentService.findAllByPost(post);
+    return comments;
+  }
+
+  /**
    * Creates a {@link Comment}.
    * @param postUuid {@link UUID}
    * @param comment {@link Comment}
@@ -35,7 +48,8 @@ public class CommentBusiness {
    */
   @Transactional
   public Comment create(UUID postUuid, Comment comment) {
-    this.postBusiness.checkExist(postUuid);
+    Post post = this.postBusiness.findPostByUuid(postUuid);
+    comment.setPostCode(post.getCode());
     return this.commentService.create(comment);
   }
 
