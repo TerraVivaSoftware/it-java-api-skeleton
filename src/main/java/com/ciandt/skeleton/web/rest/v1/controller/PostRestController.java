@@ -2,12 +2,14 @@ package com.ciandt.skeleton.web.rest.v1.controller;
 
 import com.ciandt.skeleton.core.business.PostBusiness;
 import com.ciandt.skeleton.core.domain.Post;
-import com.ciandt.skeleton.web.rest.v1.assembler.PostAssembler;
-import com.ciandt.skeleton.web.rest.v1.resource.PostResource;
+import com.ciandt.skeleton.core.exception.BusinessException;
+import com.ciandt.skeleton.web.rest.v1.resource.PostCreateResource;
+import com.ciandt.skeleton.web.rest.v1.resource.PostGetResource;
+import com.ciandt.skeleton.web.rest.v1.resource.PostUpdateResource;
+import com.ciandt.skeleton.web.util.CurrentUserUtil;
+import com.vidolima.ditiow.annotation.ResponseResource;
 import java.util.UUID;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,52 +30,55 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostRestController extends RestControllerBase {
 
   private PostBusiness postBusiness;
-  private PostAssembler postAssembler;
+  private CurrentUserUtil currentUserUtil;
 
   @Autowired
-  public PostRestController(PostBusiness postBusiness, PostAssembler postAssembler) {
+  public PostRestController(PostBusiness postBusiness, CurrentUserUtil currentUserUtil) {
     this.postBusiness = postBusiness;
-    this.postAssembler = postAssembler;
+    this.currentUserUtil = currentUserUtil;
   }
 
   /**
    * Gets a {@link Post}.
-   * @return ResponseEntity {@link PostResource}
+   * @return ResponseEntity {@link PostUpdateResource}
    */
   @GetMapping(path = "/posts/{uuid}")
-  public ResponseEntity get(@PathVariable  UUID uuid) {
+  @ResponseResource(PostGetResource.class)
+  public ResponseEntity<?> get(@PathVariable UUID uuid) {
     Post post = this.postBusiness.findPostByUuid(uuid);
-    return ResponseEntity.ok(this.postAssembler.fromDomain(post));
+    return ResponseEntity.ok(post);
   }
 
   /**
    * Creates a {@link Post}.
-   * @return ResponseEntity {@link PostResource}
+   * @return ResponseEntity {@link PostUpdateResource}
    */
   @PostMapping(path = "/posts")
-  public ResponseEntity create(@Valid @RequestBody PostResource resource) {
-    Post domain = this.postAssembler.fromResource(resource);
-    Post post = this.postBusiness.create(domain);
-    return ResponseEntity.ok(this.postAssembler.fromDomain(post));
+  @ResponseResource(PostGetResource.class)
+  public ResponseEntity<?> create(@Valid @RequestBody PostCreateResource resource) {
+    Post post = resource.toBusiness();
+    post.setAuthor(this.currentUserUtil.getUser());
+    return ResponseEntity.ok(this.postBusiness.create(post));
   }
 
   /**
    * Updates a {@link Post}.
-   * @return ResponseEntity {@link PostResource}
+   * @return ResponseEntity {@link PostUpdateResource}
    */
   @PutMapping(path = "/posts/{uuid}")
-  public ResponseEntity update(@PathVariable UUID uuid, @RequestBody @Valid PostResource resource) {
-    resource.setUuid(uuid);
-    Post domain = this.postAssembler.fromResource(resource);
-    Post post = this.postBusiness.update(domain);
-    return ResponseEntity.ok(this.postAssembler.fromDomain(post));
+  @ResponseResource(PostGetResource.class)
+  public ResponseEntity<?> update(@PathVariable UUID uuid, @RequestBody @Valid PostUpdateResource resource) {
+    Post post = resource.toBusiness();
+    post.setUuid(uuid);
+    post.setAuthor(this.currentUserUtil.getUser());
+    return ResponseEntity.ok(this.postBusiness.update(post));
   }
 
   /**
    * Deletes a {@link Post}.
    */
   @DeleteMapping(path = "/posts/{uuid}")
-  public ResponseEntity delete(@PathVariable UUID uuid) {
+  public ResponseEntity<?> delete(@PathVariable UUID uuid) throws BusinessException {
     this.postBusiness.delete(uuid);
     return ResponseEntity.noContent().build();
   }

@@ -2,14 +2,11 @@ package com.ciandt.skeleton.web.rest.v1.resource;
 
 import com.ciandt.skeleton.core.domain.Comment;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
+import com.vidolima.ditiow.resource.AbstractResource;
 import java.util.UUID;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * This is the {@link Comment}'s resource representation for creation.
@@ -20,15 +17,16 @@ import lombok.NoArgsConstructor;
  * @since Jul 29, 2019
  */
 @Data
-@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CommentCreateResource {
+public class CommentCreateResource extends AbstractResource<Comment> {
+
   private UUID uuid;
-  @NotNull
-  private UserResource author;
-  private Date publishedAt;
-  @NotEmpty
-  @Min(value = 1)
-  @Max(value = 200)
-  private String text;
+  @NotEmpty()
+  @Length(min = 5, max = 300)
+  private String content;
+
+  public CommentCreateResource() {
+    super(Comment.class);
+  }
+
 }
