@@ -17,6 +17,7 @@ CI&amp;T IT's default Java project skeleton for Microservices and APIs (with bas
 - Spring MVC
 - Spring Data
 - Docker
+- [Ditiow](https://github.com/marcosvidolin/ditiow)
 
 ### Packages
 
