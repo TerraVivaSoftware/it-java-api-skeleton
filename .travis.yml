@@ -4,4 +4,4 @@ jdk: openjdk8
 before_script:
   - chmod a+x gradlew
 
-sccript: ./gradlew build
+script: ./gradlew build
