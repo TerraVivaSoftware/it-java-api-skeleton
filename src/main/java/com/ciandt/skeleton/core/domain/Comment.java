@@ -57,7 +57,6 @@ public class Comment {
   @PrePersist
   public void prePersist() {
     this.uuid = UUID.randomUUID();
-    this.publishedAt = new Date();
   }
 
   @PreUpdate

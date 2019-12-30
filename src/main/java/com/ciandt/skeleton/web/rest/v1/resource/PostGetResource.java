@@ -24,4 +24,5 @@ public class PostGetResource {
   private String title;
   private String content;
   private Date publishedAt;
+  private Date editedAt;
 }

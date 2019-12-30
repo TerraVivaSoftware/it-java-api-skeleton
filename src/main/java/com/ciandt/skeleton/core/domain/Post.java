@@ -20,6 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * This class represents a post made by an {@link User} in the blog.
@@ -55,6 +56,11 @@ public class Post {
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "POST_DT_CREATE", updatable = false)
   private Date publishedAt;
+
+  @UpdateTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "POST_DT_UPDATE", updatable = false)
+  private Date editedAt;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private Collection<Comment> comments;
