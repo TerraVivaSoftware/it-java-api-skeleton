@@ -42,7 +42,7 @@ public class Post {
   @Column(name = "POST_CD_UUID", unique = true, updatable = false)
   private UUID uuid;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(updatable = false)
   private User author;
 
