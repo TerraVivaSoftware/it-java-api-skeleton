@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -57,11 +56,6 @@ public class Comment {
   @PrePersist
   public void prePersist() {
     this.uuid = UUID.randomUUID();
-  }
-
-  @PreUpdate
-  public void preUpdate() {
-    this.publishedAt = new Date();
   }
 
   /**
