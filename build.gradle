@@ -47,7 +47,7 @@ dependencies {
 	compile('com.h2database:h2:1.4.200')
 
 	// Utils
-	compile 'com.vidolima:ditiow:1.0.0'
+	compile 'com.vidolima:ditiow:0.1.2'
 	compileOnly 'org.projectlombok:lombok:1.18.8'
 	annotationProcessor 'org.projectlombok:lombok:1.18.8'
 
