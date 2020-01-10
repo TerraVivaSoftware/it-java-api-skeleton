@@ -7,7 +7,6 @@ import com.vidolima.ditiow.resource.AbstractResource;
 import java.util.Date;
 import java.util.UUID;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * This is the {@link Post}'s resource representation for visualization.

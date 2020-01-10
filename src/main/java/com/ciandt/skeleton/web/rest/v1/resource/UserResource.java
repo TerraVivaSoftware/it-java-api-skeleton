@@ -4,7 +4,6 @@ import com.ciandt.skeleton.core.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.vidolima.ditiow.resource.AbstractResource;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * This is the {@link User}'s resource representation.
