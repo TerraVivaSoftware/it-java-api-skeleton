@@ -2,6 +2,7 @@ package com.ciandt.skeleton.web.rest.v1.resource;
 
 import com.ciandt.skeleton.core.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.vidolima.ditiow.resource.AbstractResource;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,9 +15,12 @@ import lombok.NoArgsConstructor;
  * @since Jul 29, 2019
  */
 @Data
-@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserResource {
+public class UserResource extends AbstractResource<User> {
   private String login;
   private String name;
+
+  public UserResource() {
+    super(User.class);
+  }
 }
