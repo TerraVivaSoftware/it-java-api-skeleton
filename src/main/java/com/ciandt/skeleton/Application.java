@@ -17,13 +17,4 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    /**
-     * Configures the Ditiow aspect bean.
-     * @return Ditiow aspect
-     */
-    @Bean
-    public DitiowAspect ditiow() {
-        return new DitiowAspect();
-    }
-
 }
