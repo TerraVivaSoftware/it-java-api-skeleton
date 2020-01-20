@@ -2,6 +2,7 @@ package com.ciandt.skeleton.service;
 
 import com.ciandt.skeleton.core.domain.Post;
 import com.ciandt.skeleton.repository.PostResporitory;
+import java.util.Collection;
 import java.util.UUID;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,15 @@ public class PostService {
   @Autowired
   public PostService(PostResporitory postResporitory) {
     this.postResporitory = postResporitory;
+  }
+
+  /**
+   * Search {@link Post}.
+   * @return post {@link Post}
+   */
+  // TODO: filter by creation?
+  public Collection<Post> search() {
+    return this.postResporitory.findAll();
   }
 
   /**

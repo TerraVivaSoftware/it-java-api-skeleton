@@ -25,8 +25,4 @@ public class CommentCreateResource extends AbstractResource<Comment> {
   @Length(min = 5, max = 300)
   private String content;
 
-  public CommentCreateResource() {
-    super(Comment.class);
-  }
-
 }

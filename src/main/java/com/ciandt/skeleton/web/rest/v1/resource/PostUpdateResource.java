@@ -28,9 +28,4 @@ public class PostUpdateResource extends AbstractResource<Post> {
   @NotEmpty
   @Length(min = 50, max = 3000)
   private String content;
-
-  public PostUpdateResource() {
-    super(Post.class);
-  }
-
 }

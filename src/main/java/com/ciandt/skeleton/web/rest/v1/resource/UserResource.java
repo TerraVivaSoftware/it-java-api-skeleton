@@ -18,8 +18,4 @@ import lombok.Data;
 public class UserResource extends AbstractResource<User> {
   private String login;
   private String name;
-
-  public UserResource() {
-    super(User.class);
-  }
 }

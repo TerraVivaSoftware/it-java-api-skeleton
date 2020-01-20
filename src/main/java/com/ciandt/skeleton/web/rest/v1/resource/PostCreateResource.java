@@ -22,15 +22,11 @@ public class PostCreateResource extends AbstractResource<Post> {
 
   private UUID uuid;
 
-  @Length(min = 50, max = 200)
+  @NotEmpty
+  @Length(min = 10, max = 200)
   private String title;
 
   @NotEmpty
   @Length(min = 50, max = 3000)
   private String content;
-
-  public PostCreateResource() {
-    super(Post.class);
-  }
-
 }

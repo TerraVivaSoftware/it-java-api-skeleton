@@ -14,8 +14,4 @@ public class CommentGetResource extends AbstractResource<Comment> {
   private UserResource author;
   private Date publishedAt;
   private String content;
-
-  public CommentGetResource() {
-    super(Comment.class);
-  }
 }

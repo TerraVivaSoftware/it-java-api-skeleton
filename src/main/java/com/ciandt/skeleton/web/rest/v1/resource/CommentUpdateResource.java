@@ -19,14 +19,8 @@ import org.hibernate.validator.constraints.Length;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CommentUpdateResource extends AbstractResource<Comment> {
-
   private UUID uuid;
   @NotEmpty()
   @Length(min = 5, max = 300)
   private String content;
-
-  public CommentUpdateResource() {
-    super(Comment.class);
-  }
-
 }

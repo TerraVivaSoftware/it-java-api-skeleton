@@ -32,6 +32,15 @@ public class PostBusiness {
   }
 
   /**
+   * Search {@link Post}.
+   * @return post {@link Post}
+   */
+  // TODO: filter by creation?
+  public Collection<Post> search() {
+    return this.postService.search();
+  }
+
+  /**
    * Finds a {@link Post} by {@link UUID}.
    * @param uuid {@link UUID}
    * @return post {@link Post}

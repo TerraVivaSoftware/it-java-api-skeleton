@@ -57,7 +57,7 @@ public class CommentRestController extends RestControllerBase {
   @PostMapping(path = "/posts/{postUuid}/comments")
   @ResponseResource(CommentGetResource.class)
   public ResponseEntity<?> create(@PathVariable UUID postUuid, @RequestBody @Valid CommentCreateResource resource) {
-    Comment comment = resource.toBusiness();
+    Comment comment = resource.toDomain();
     comment.setAuthor(this.currentUserUtil.getUser());
     return ResponseEntity.ok(this.commentBusiness.create(postUuid, comment));
   }
@@ -69,7 +69,7 @@ public class CommentRestController extends RestControllerBase {
   @PutMapping(path = "/comments/{uuid}")
   @ResponseResource(CommentGetResource.class)
   public ResponseEntity<?> update(@PathVariable UUID uuid, @RequestBody @Valid CommentUpdateResource resource) {
-    Comment comment = resource.toBusiness();
+    Comment comment = resource.toDomain();
     comment.setAuthor(this.currentUserUtil.getUser());
     return ResponseEntity.ok(this.commentBusiness.update(uuid, comment));
   }
