@@ -15,7 +15,7 @@ public class BenefitService {
   }
 
   public Collection<BenefitEntity> findAllCurrent() {
-    return null;
+    return this.repository.findAllCurrent();
   }
 
 }

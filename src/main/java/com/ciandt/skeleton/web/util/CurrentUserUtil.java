@@ -1,6 +1,6 @@
 package com.ciandt.skeleton.web.util;
 
-import com.ciandt.skeleton.data.entity.User;
+import com.ciandt.skeleton.data.entity.UserEntity;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -13,8 +13,8 @@ public class CurrentUserUtil {
    * Gets the current user from request.
    * @return User
    */
-  public User getUser() {
-    User user = new User();
+  public UserEntity getUser() {
+    UserEntity user = new UserEntity();
     user.setLogin("soandso");
     user.setName("So and So");
     user.setEmail("soandso@ciandt.com");

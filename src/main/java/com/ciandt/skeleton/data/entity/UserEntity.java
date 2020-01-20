@@ -18,7 +18,7 @@ import org.hibernate.annotations.Type;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
-public class User {
+public class UserEntity {
 
   @Id
   @Column(name = "USER_TX_LOGIN")

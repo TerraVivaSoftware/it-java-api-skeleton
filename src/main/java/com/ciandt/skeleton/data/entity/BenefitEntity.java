@@ -1,5 +1,8 @@
 package com.ciandt.skeleton.data.entity;
 
+import com.ciandt.skeleton.core.domain.Benefit;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.BeanUtils;
 
 @Data
 @NoArgsConstructor
@@ -44,6 +48,15 @@ public class BenefitEntity {
   @Column(name = "BENE_SG_TYPE")
   private String type;
 
+  @Column(name = "BENE_IN_ACTIVE")
+  private boolean active;
+
+  @Column(name = "BENE_DT_BEGIN")
+  private Date beginAt;
+
+  @Column(name = "BENE_DT_END")
+  private Date endAt;
+
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "BENE_DT_CREATION", updatable = false)
@@ -57,6 +70,27 @@ public class BenefitEntity {
   @PrePersist
   public void prePersist() {
     this.uuid = UUID.randomUUID();
+  }
+
+  public BenefitEntity(final Benefit benefit) {
+    BeanUtils.copyProperties(this, benefit);
+  }
+
+  public static Benefit toDomain(final BenefitEntity entity) {
+    Benefit benefit = BenefitFactory(entity.getType());
+    return null;
+  }
+
+  public static Collection<Benefit> toDomain(Collection<BenefitEntity> entities) {
+    Collection<Benefit> benefits = new ArrayList<>();
+    for (BenefitEntity entity : entities) {
+      benefits.add(entity.toDomain());
+    }
+    return benefits;
+  }
+
+  public Benefit toDomain() {
+    return BenefitEntity.toDomain(this);
   }
 
 }
