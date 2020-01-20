@@ -1,6 +1,6 @@
 package com.ciandt.skeleton.web.util;
 
-import com.ciandt.skeleton.core.domain.User;
+import com.ciandt.skeleton.data.entity.User;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;

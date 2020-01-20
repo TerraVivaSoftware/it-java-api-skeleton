@@ -1,6 +1,6 @@
 package com.ciandt.skeleton.web.rest.v1.resource;
 
-import com.ciandt.skeleton.core.domain.User;
+import com.ciandt.skeleton.data.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.vidolima.ditiow.resource.AbstractResource;
 import lombok.Data;

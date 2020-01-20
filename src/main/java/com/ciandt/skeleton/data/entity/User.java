@@ -1,4 +1,4 @@
-package com.ciandt.skeleton.core.domain;
+package com.ciandt.skeleton.data.entity;
 
 import java.util.UUID;
 import javax.persistence.Column;

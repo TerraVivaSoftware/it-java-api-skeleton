@@ -25,7 +25,7 @@ CI&amp;T IT's default Java project skeleton for Microservices and APIs (with bas
 
 **com.ciandt.skeleton.core.domain**
 
-**com.ciandt.skeleton.core.business**
+**com.ciandt.skeleton.business**
 
 **com.ciandt.skeleton.core.exception**
 
@@ -34,7 +34,7 @@ CI&amp;T IT's default Java project skeleton for Microservices and APIs (with bas
 
 **com.ciandt.skeleton.service**
 
-**com.ciandt.skeleton.repository**
+**com.ciandt.skeleton.data.repository**
 
 **com.ciandt.skeleton.util**
 
