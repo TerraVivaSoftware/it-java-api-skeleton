@@ -67,7 +67,7 @@ public class PostRestController extends RestControllerBase {
    * @return ResponseEntity {@link PostUpdateResource}
    */
   @PostMapping(path = "/posts")
-  @ResponseResource(Post.class)
+  @ResponseResource(PostGetResource.class)
   public ResponseEntity<?> create(@Valid @RequestBody PostCreateResource resource) {
     Post post = resource.toDomain();
     post.setAuthor(this.currentUserUtil.getUser());
