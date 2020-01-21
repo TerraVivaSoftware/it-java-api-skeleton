@@ -6,7 +6,7 @@ import com.ciandt.skeleton.core.domain.Post;
 import com.ciandt.skeleton.web.rest.v1.resource.CommentCreateResource;
 import com.ciandt.skeleton.web.rest.v1.resource.CommentGetResource;
 import com.ciandt.skeleton.web.rest.v1.resource.CommentUpdateResource;
-import com.ciandt.skeleton.web.util.CurrentUserUtil;
+import com.ciandt.skeleton.web.rest.util.CurrentUserUtil;
 import com.vidolima.ditiow.annotation.ResponseResource;
 import java.util.Collection;
 import java.util.UUID;

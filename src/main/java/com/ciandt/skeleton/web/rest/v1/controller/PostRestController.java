@@ -7,7 +7,7 @@ import com.ciandt.skeleton.web.rest.v1.resource.PostCreateResource;
 import com.ciandt.skeleton.web.rest.v1.resource.PostGetResource;
 import com.ciandt.skeleton.web.rest.v1.resource.PostSearchResource;
 import com.ciandt.skeleton.web.rest.v1.resource.PostUpdateResource;
-import com.ciandt.skeleton.web.util.CurrentUserUtil;
+import com.ciandt.skeleton.web.rest.util.CurrentUserUtil;
 import com.vidolima.ditiow.annotation.ResponseResource;
 import java.util.Collection;
 import java.util.UUID;
@@ -35,7 +35,7 @@ public class PostRestController extends RestControllerBase {
   private CurrentUserUtil currentUserUtil;
 
   @Autowired
-  public PostRestController(PostBusiness postBusiness, CurrentUserUtil currentUserUtil) {
+  protected PostRestController(PostBusiness postBusiness, CurrentUserUtil currentUserUtil) {
     this.postBusiness = postBusiness;
     this.currentUserUtil = currentUserUtil;
   }
@@ -46,7 +46,7 @@ public class PostRestController extends RestControllerBase {
    */
   @GetMapping(path = "/posts/{uuid}")
   @ResponseResource(PostGetResource.class)
-  public ResponseEntity<?> get(@PathVariable UUID uuid) {
+  protected ResponseEntity<?> get(@PathVariable UUID uuid) {
     Post post = this.postBusiness.findPostByUuid(uuid);
     return ResponseEntity.ok(post);
   }
@@ -57,7 +57,7 @@ public class PostRestController extends RestControllerBase {
    */
   @GetMapping(path = "/posts")
   @ResponseResource(PostSearchResource.class)
-  public ResponseEntity<?> search() {
+  protected ResponseEntity<?> search() {
     Collection<Post> posts = this.postBusiness.search();
     return ResponseEntity.ok(posts);
   }
@@ -68,7 +68,7 @@ public class PostRestController extends RestControllerBase {
    */
   @PostMapping(path = "/posts")
   @ResponseResource(PostGetResource.class)
-  public ResponseEntity<?> create(@Valid @RequestBody PostCreateResource resource) {
+  protected ResponseEntity<?> create(@Valid @RequestBody PostCreateResource resource) {
     Post post = resource.toDomain();
     post.setAuthor(this.currentUserUtil.getUser());
     return ResponseEntity.ok(this.postBusiness.create(post));
@@ -80,7 +80,7 @@ public class PostRestController extends RestControllerBase {
    */
   @PutMapping(path = "/posts/{uuid}")
   @ResponseResource(PostGetResource.class)
-  public ResponseEntity<?> update(@PathVariable UUID uuid, @RequestBody @Valid PostUpdateResource resource) {
+  protected ResponseEntity<?> update(@PathVariable UUID uuid, @RequestBody @Valid PostUpdateResource resource) {
     Post post = resource.toDomain();
     post.setUuid(uuid);
     post.setAuthor(this.currentUserUtil.getUser());
@@ -91,9 +91,14 @@ public class PostRestController extends RestControllerBase {
    * Deletes a {@link Post}.
    */
   @DeleteMapping(path = "/posts/{uuid}")
-  public ResponseEntity<?> delete(@PathVariable UUID uuid) throws BusinessException {
+  protected ResponseEntity<?> delete(@PathVariable UUID uuid) throws BusinessException {
     this.postBusiness.delete(uuid);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping(path = "/posts/error")
+  protected ResponseEntity<?> error() throws BusinessException {
+    throw new BusinessException("Não é possivel realizar essa oparação");
   }
 
 }

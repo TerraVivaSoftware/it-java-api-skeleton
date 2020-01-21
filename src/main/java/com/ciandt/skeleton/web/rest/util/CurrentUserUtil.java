@@ -1,4 +1,4 @@
-package com.ciandt.skeleton.web.util;
+package com.ciandt.skeleton.web.rest.util;
 
 import com.ciandt.skeleton.core.domain.User;
 import org.springframework.context.annotation.Scope;
