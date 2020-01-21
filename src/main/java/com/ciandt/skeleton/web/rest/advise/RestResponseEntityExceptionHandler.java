@@ -21,11 +21,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-  private ErrorResource getErrorResource(final WebRequest request, final Exception ex) {
+  private ErrorResource getErrorResource(String cause, final Exception ex, final WebRequest request) {
     HttpServletRequest req = ((ServletWebRequest) request).getRequest();
     String path = req.getRequestURI();
     int httpStatusCode = HttpStatus.CONFLICT.value();
-    return new ErrorResource(httpStatusCode, ex.getCause().toString(), ex.getMessage(), path);
+    return new ErrorResource(httpStatusCode, cause, ex.getMessage(), path);
   }
 
   /**
@@ -36,7 +36,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
   @ExceptionHandler(value = {BusinessException.class})
   @ResponseStatus(value = HttpStatus.CONFLICT)
   protected ResponseEntity<Object> handleConflict(Exception ex, WebRequest request) {
-    ErrorResource error = getErrorResource(request, ex);
+    ErrorResource error = getErrorResource("Conflict", ex, request);
     return handleExceptionInternal(ex, error, new HttpHeaders(), HttpStatus.CONFLICT, request);
   }
 
