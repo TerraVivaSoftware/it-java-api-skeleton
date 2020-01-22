@@ -98,7 +98,6 @@ public class PostRestController extends RestControllerBase {
 
   @GetMapping(path = "/posts/error")
   protected ResponseEntity<?> error() throws BusinessException {
-    throw new BusinessException("Não é possivel realizar essa oparação");
+    throw new BusinessException("Não é possivel realizar essa operação");
   }
-
 }
