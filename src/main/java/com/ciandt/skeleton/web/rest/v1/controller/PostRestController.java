@@ -35,7 +35,7 @@ public class PostRestController extends RestControllerBase {
   private CurrentUserUtil currentUserUtil;
 
   @Autowired
-  protected PostRestController(PostBusiness postBusiness, CurrentUserUtil currentUserUtil) {
+  public PostRestController(PostBusiness postBusiness, CurrentUserUtil currentUserUtil) {
     this.postBusiness = postBusiness;
     this.currentUserUtil = currentUserUtil;
   }
@@ -46,7 +46,7 @@ public class PostRestController extends RestControllerBase {
    */
   @GetMapping(path = "/posts/{uuid}")
   @ResponseResource(PostGetResource.class)
-  protected ResponseEntity<?> get(@PathVariable UUID uuid) {
+  public ResponseEntity<?> get(@PathVariable UUID uuid) {
     Post post = this.postBusiness.findPostByUuid(uuid);
     return ResponseEntity.ok(post);
   }
@@ -57,7 +57,7 @@ public class PostRestController extends RestControllerBase {
    */
   @GetMapping(path = "/posts")
   @ResponseResource(PostSearchResource.class)
-  protected ResponseEntity<?> search() {
+  public ResponseEntity<?> search() {
     Collection<Post> posts = this.postBusiness.search();
     return ResponseEntity.ok(posts);
   }
@@ -68,7 +68,7 @@ public class PostRestController extends RestControllerBase {
    */
   @PostMapping(path = "/posts")
   @ResponseResource(PostGetResource.class)
-  protected ResponseEntity<?> create(@Valid @RequestBody PostCreateResource resource) {
+  public ResponseEntity<?> create(@Valid @RequestBody PostCreateResource resource) {
     Post post = resource.toDomain();
     post.setAuthor(this.currentUserUtil.getUser());
     return ResponseEntity.ok(this.postBusiness.create(post));
@@ -80,7 +80,7 @@ public class PostRestController extends RestControllerBase {
    */
   @PutMapping(path = "/posts/{uuid}")
   @ResponseResource(PostGetResource.class)
-  protected ResponseEntity<?> update(@PathVariable UUID uuid, @RequestBody @Valid PostUpdateResource resource) {
+  public ResponseEntity<?> update(@PathVariable UUID uuid, @RequestBody @Valid PostUpdateResource resource) {
     Post post = resource.toDomain();
     post.setUuid(uuid);
     post.setAuthor(this.currentUserUtil.getUser());
@@ -91,13 +91,13 @@ public class PostRestController extends RestControllerBase {
    * Deletes a {@link Post}.
    */
   @DeleteMapping(path = "/posts/{uuid}")
-  protected ResponseEntity<?> delete(@PathVariable UUID uuid) throws BusinessException {
+  public ResponseEntity<?> delete(@PathVariable UUID uuid) throws BusinessException {
     this.postBusiness.delete(uuid);
     return ResponseEntity.noContent().build();
   }
 
   @GetMapping(path = "/posts/error")
-  protected ResponseEntity<?> error() throws BusinessException {
+  public ResponseEntity<?> error() throws BusinessException {
     throw new BusinessException("Não é possivel realizar essa oparação");
   }
 
