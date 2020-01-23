@@ -48,6 +48,8 @@ dependencies {
 	compile('com.h2database:h2:1.4.200')
 
 	// Utils
+	// https://mvnrepository.com/artifact/net.sf.dozer/dozer
+	compile 'com.github.dozermapper:dozer-core:6.5.0'
 	compile 'com.vidolima:ditiow:0.2.2'
 	compileOnly 'org.projectlombok:lombok:1.18.8'
 	annotationProcessor 'org.projectlombok:lombok:1.18.8'
