@@ -1,12 +1,10 @@
 package com.ciandt.skeleton.web.rest.v1.controller;
 
-import com.ciandt.skeleton.core.domain.Post;
 import com.ciandt.skeleton.core.exception.BusinessException;
 import javax.persistence.EntityNotFoundException;
 import javax.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
