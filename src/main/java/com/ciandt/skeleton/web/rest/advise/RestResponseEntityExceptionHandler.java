@@ -2,6 +2,7 @@ package com.ciandt.skeleton.web.rest.advise;
 
 import com.ciandt.skeleton.core.exception.BusinessException;
 import com.ciandt.skeleton.core.exception.RemovePostWithCommentException;
+import java.time.LocalDateTime;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
@@ -19,13 +20,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * @since Jan 21, 2020
  */
 @Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
   private ResponseEntity<?> getStandardErrorHandler(final HttpStatus httpStatus, final Exception ex
       , final HttpServletRequest request) {
-    ErrorMessageResource errorMessage = new ErrorMessageResource(httpStatus.value()
-        , ex.getClass().getSimpleName(), ex.getMessage(), request.getRequestURI());
+
+    CustomErrorMessageResource errorMessage = new CustomErrorMessageResource(
+        LocalDateTime.now(),
+        httpStatus.value(),
+        httpStatus.getReasonPhrase(),
+        ex.getMessage(),
+        request.getRequestURI());
 
     return ResponseEntity.status(httpStatus.value()).body(errorMessage);
   }
@@ -43,9 +49,20 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
       BusinessException.class,
       RemovePostWithCommentException.class
   })
-  protected ResponseEntity<?> handleConflict(BusinessException ex, HttpServletRequest request) {
-    log.warn(ex.getMessage());
+  public ResponseEntity<?> handleConflict(Exception ex, HttpServletRequest request) {
     return this.getStandardErrorHandler(HttpStatus.CONFLICT, ex, request);
+  }
+
+  /**
+   * The 404 (Not Found) status code indicates that the resource was not found.
+   *
+   * @param ex the exception
+   * @param request the given request
+   * @return returns a message with error
+   */
+  @ExceptionHandler(value = EntityNotFoundException.class)
+  public ResponseEntity<?> handleNotFound(EntityNotFoundException ex, HttpServletRequest request) {
+    return ResponseEntity.notFound().build();
   }
 
 }

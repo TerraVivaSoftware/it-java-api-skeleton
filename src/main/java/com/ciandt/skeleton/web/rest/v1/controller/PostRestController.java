@@ -96,9 +96,4 @@ public class PostRestController extends RestControllerBase {
     return ResponseEntity.noContent().build();
   }
 
-  @GetMapping(path = "/posts/error")
-  public ResponseEntity<?> error() throws BusinessException {
-    throw new BusinessException("Não é possivel realizar essa oparação");
-  }
-
 }
