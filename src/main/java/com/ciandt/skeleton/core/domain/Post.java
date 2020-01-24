@@ -1,7 +1,7 @@
 package com.ciandt.skeleton.core.domain;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,8 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,6 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * This class represents a post made by an {@link User} in the blog.
+ *
  * @author mvidolin
  * @since Jul 29, 2019
  */
@@ -38,7 +37,7 @@ public class Post {
   @Column(name = "POST_CD_POST", unique = true)
   private Long code;
 
-  @Type(type="org.hibernate.type.UUIDCharType")
+  @Type(type = "org.hibernate.type.UUIDCharType")
   @Column(name = "POST_CD_UUID", unique = true, updatable = false)
   private UUID uuid;
 
@@ -53,14 +52,12 @@ public class Post {
   private String content;
 
   @CreationTimestamp
-  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "POST_DT_CREATE", updatable = false)
-  private Date publishedAt;
+  private LocalDateTime publishedAt;
 
   @UpdateTimestamp
-  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "POST_DT_UPDATE", updatable = false)
-  private Date editedAt;
+  private LocalDateTime editedAt;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private Collection<Comment> comments;
@@ -72,7 +69,6 @@ public class Post {
 
   /**
    * Updates the current Comment with the new values.
-   * @param post
    */
   public void applyValues(final Post post) {
     this.setContent(post.getContent());

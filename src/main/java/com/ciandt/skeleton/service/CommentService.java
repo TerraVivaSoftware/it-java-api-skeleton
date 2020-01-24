@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * This is the {@link Comment}'s service layer.
- * The service layer is responsible for handling infrastructure code such as:
- * repository, cache, ftp, queue, sms, etc.
+ * This is the {@link Comment}'s service layer. The service layer is responsible for handling
+ * infrastructure code such as: repository, cache, ftp, queue, sms, etc.
  *
  * @author mvidolin
  * @since Jul 29, 2019
@@ -29,6 +28,7 @@ public class CommentService {
 
   /**
    * Finds a {@link Comment} by UUID.
+   *
    * @param uuid {@link UUID}
    * @return Comment
    */
@@ -38,34 +38,37 @@ public class CommentService {
 
   /**
    * Creates a {@link Comment}.
-   * @param comment
+   *
    * @return comment
    */
   @Transactional
   public Comment create(Comment comment) {
     // check "code" to ensure a creation (this is a infra check not a business validation).
     if (comment.getCode() != null) {
-      throw new IllegalArgumentException("This comment could not be created. The comment already have a code.");
+      throw new IllegalArgumentException(
+          "This comment could not be created. The comment already have a code.");
     }
     return this.commentRepository.save(comment);
   }
 
   /**
    * Updates a {@link Comment}.
-   * @param comment
+   *
    * @return comment
    */
   @Transactional
   public Comment update(Comment comment) {
     // check "code" to ensure an update (this is a infra check not a business validation).
     if (comment.getCode() == null) {
-      throw new IllegalArgumentException("This comment could not be updated. The comment have no code.");
+      throw new IllegalArgumentException(
+          "This comment could not be updated. The comment have no code.");
     }
     return this.commentRepository.save(comment);
   }
 
   /**
    * Deletes a {@link Comment}.
+   *
    * @param uuid {@link UUID}
    */
   @Transactional
@@ -76,6 +79,7 @@ public class CommentService {
 
   /**
    * Finds all {@link Comment}s from a {@link Post}.
+   *
    * @param post {@link UUID}
    * @return collection of {@link Comment}
    */

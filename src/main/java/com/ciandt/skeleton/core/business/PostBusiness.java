@@ -12,9 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * {@link Post}'s business layer.
- * The business layer is responsible for handling business logic such as:
- * ensure business flow, validations, throw business exceptions, etc.
+ * {@link Post}'s business layer. The business layer is responsible for handling business logic such
+ * as: ensure business flow, validations, throw business exceptions, etc.
  *
  * @author mvidolin
  * @since Jul 29, 2019
@@ -33,6 +32,7 @@ public class PostBusiness {
 
   /**
    * Search {@link Post}.
+   *
    * @return post {@link Post}
    */
   // TODO: filter by creation?
@@ -42,6 +42,7 @@ public class PostBusiness {
 
   /**
    * Finds a {@link Post} by {@link UUID}.
+   *
    * @param uuid {@link UUID}
    * @return post {@link Post}
    */
@@ -51,7 +52,7 @@ public class PostBusiness {
 
   /**
    * Creates a {@link Post}.
-   * @param post
+   *
    * @return post
    */
   @Transactional
@@ -62,7 +63,7 @@ public class PostBusiness {
 
   /**
    * Updates a {@link Post}.
-   * @param post
+   *
    * @return post
    */
   @Transactional
@@ -74,18 +75,19 @@ public class PostBusiness {
 
   /**
    * Deletes a {@link Post}.
-   * @param uuid
    */
   @Transactional
   public void delete(UUID uuid) throws BusinessException {
     if (this.hasComments(uuid)) {
-      throw new BusinessException("The Post " + uuid + " has associated comments end cannot be removed.");
+      throw new BusinessException(
+          "The Post " + uuid + " has associated comments end cannot be removed.");
     }
     this.postService.delete(uuid);
   }
 
   /**
    * Checks if the given {@link Post} exist.
+   *
    * @param uuid {@link UUID}
    */
   public void checkExist(UUID uuid) {
@@ -96,6 +98,7 @@ public class PostBusiness {
 
   /**
    * Checks if the {@link Post} has any {@link Comment}.
+   *
    * @param uuid {@link UUID}
    * @return true if has comment
    */

@@ -1,6 +1,6 @@
 package com.ciandt.skeleton.core.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,6 +18,7 @@ import org.hibernate.annotations.Type;
 
 /**
  * This class represents an {@link User}'s comment in a {@link Post}.
+ *
  * @author mvidolin
  * @since Jul 29, 2019
  */
@@ -34,7 +33,7 @@ public class Comment {
   @Column(name = "COMM_CD_COMMENT", unique = true)
   private Long code;
 
-  @Type(type="org.hibernate.type.UUIDCharType")
+  @Type(type = "org.hibernate.type.UUIDCharType")
   @Column(name = "COMM_CD_UUID", unique = true, updatable = false)
   private UUID uuid;
 
@@ -43,9 +42,8 @@ public class Comment {
   private User author;
 
   @CreationTimestamp
-  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "COMM_DT_CREATE", updatable = false)
-  private Date publishedAt;
+  private LocalDateTime publishedAt;
 
   @Column(name = "COMM_TX_CONTENT")
   private String content;
@@ -60,7 +58,6 @@ public class Comment {
 
   /**
    * Updates the current Comment with the new values.
-   * @param comment
    */
   public void applyValues(final Comment comment) {
     this.setContent(comment.getContent());

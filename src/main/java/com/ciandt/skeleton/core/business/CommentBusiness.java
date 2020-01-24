@@ -10,9 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * {@link Comment}'s business layer.
- * The business layer is responsible for handling business logic such as:
- * ensure business flow, validations, throw business exceptions, etc.
+ * {@link Comment}'s business layer. The business layer is responsible for handling business logic
+ * such as: ensure business flow, validations, throw business exceptions, etc.
  *
  * @author mvidolin
  * @since Jul 29, 2019
@@ -31,6 +30,7 @@ public class CommentBusiness {
 
   /**
    * Finds all {@link Comment}s from a {@link Post}.
+   *
    * @param postUuid {@link UUID}
    * @return collection of {@link Comment}
    */
@@ -42,6 +42,7 @@ public class CommentBusiness {
 
   /**
    * Creates a {@link Comment}.
+   *
    * @param postUuid {@link UUID}
    * @param comment {@link Comment}
    * @return comment
@@ -55,7 +56,7 @@ public class CommentBusiness {
 
   /**
    * Updates a {@link Comment}.
-   * @param comment
+   *
    * @return comment
    */
   @Transactional
@@ -67,6 +68,7 @@ public class CommentBusiness {
 
   /**
    * Deletes a {@link Comment}.
+   *
    * @param uuid {@link UUID}
    */
   @Transactional

@@ -1,9 +1,9 @@
 dependencyCheck {
-    autoUpdate=true
+    autoUpdate = true
     suppressionFile = 'gradle/plugins/dependency-check/suppressions.xml'
-    format='HTML'
-    failBuildOnCVSS=10
-    failOnError=true
+    format = 'HTML'
+    failBuildOnCVSS = 10
+    failOnError = true
     analyzers {
         experimentalEnabled = true
         archiveEnabled = true

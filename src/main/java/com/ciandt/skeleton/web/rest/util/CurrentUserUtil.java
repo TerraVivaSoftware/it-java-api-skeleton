@@ -11,6 +11,7 @@ public class CurrentUserUtil {
 
   /**
    * Gets the current user from request.
+   *
    * @return User
    */
   public User getUser() {

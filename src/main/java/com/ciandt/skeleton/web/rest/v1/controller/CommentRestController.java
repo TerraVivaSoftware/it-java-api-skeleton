@@ -41,6 +41,7 @@ public class CommentRestController extends RestControllerBase {
 
   /**
    * Gets all {@link Comment}s from a {@link Post}.
+   *
    * @return ResponseEntity {@link CommentCreateResource}
    */
   @GetMapping(path = "/posts/{postUuid}/comments")
@@ -52,11 +53,13 @@ public class CommentRestController extends RestControllerBase {
 
   /**
    * Creates a {@link Comment}.
+   *
    * @return ResponseEntity {@link CommentCreateResource}
    */
   @PostMapping(path = "/posts/{postUuid}/comments")
   @ResponseResource(CommentGetResource.class)
-  public ResponseEntity<?> create(@PathVariable UUID postUuid, @RequestBody @Valid CommentCreateResource resource) {
+  public ResponseEntity<?> create(@PathVariable UUID postUuid,
+      @RequestBody @Valid CommentCreateResource resource) {
     Comment comment = resource.toDomain();
     comment.setAuthor(this.currentUserUtil.getUser());
     return ResponseEntity.ok(this.commentBusiness.create(postUuid, comment));
@@ -64,11 +67,13 @@ public class CommentRestController extends RestControllerBase {
 
   /**
    * Updates a {@link Comment}.
+   *
    * @return ResponseEntity {@link CommentCreateResource}
    */
   @PutMapping(path = "/comments/{uuid}")
   @ResponseResource(CommentGetResource.class)
-  public ResponseEntity<?> update(@PathVariable UUID uuid, @RequestBody @Valid CommentUpdateResource resource) {
+  public ResponseEntity<?> update(@PathVariable UUID uuid,
+      @RequestBody @Valid CommentUpdateResource resource) {
     Comment comment = resource.toDomain();
     comment.setAuthor(this.currentUserUtil.getUser());
     return ResponseEntity.ok(this.commentBusiness.update(uuid, comment));

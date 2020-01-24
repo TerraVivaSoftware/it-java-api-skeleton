@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * {@link Comment}'s persistence layer.
+ *
  * @author mvidolin
  * @since Jul 29, 2019
  */
@@ -17,6 +18,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
   /**
    * Finds a {@link Comment} by UUID.
+   *
    * @param uuid {@link UUID}
    * @return Comment
    */
@@ -24,7 +26,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
   /**
    * Finds all {@link Comment}s from a {@link Post} code.
-   * @param code
+   *
    * @return collection of {@link Comment}
    */
   Collection<Comment> findAllByPostCode(Long code);

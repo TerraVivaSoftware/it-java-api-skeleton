@@ -1,15 +1,16 @@
 <configuration>
 
-  <springProfile name="local,test">
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-      <encoder>
-        <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{35}) - %msg %n</pattern>
-      </encoder>
-    </appender>
-  </springProfile>
+  <root level="INFO">
+    <springProfile name="dev,qa,uat,prd">
+      <appender-ref ref="CLOUD"/>
+    </springProfile>
+    <springProfile name="local,test">
+      <appender-ref ref="STDOUT"/>
+    </springProfile>
+  </root>
 
   <springProfile name="dev,qa,uat,prd">
-    <appender name="CLOUD" class="ch.qos.logback.core.ConsoleAppender">
+    <appender class="ch.qos.logback.core.ConsoleAppender" name="CLOUD">
       <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
         <layout class="com.ciandt.skeleton.util.log.GCPCloudLoggingJSONLayout">
           <pattern>%-4relative [%thread] %-5level %logger{35} - %msg</pattern>
@@ -18,13 +19,14 @@
     </appender>
   </springProfile>
 
-  <root level="INFO">
-    <springProfile name="dev,qa,uat,prd">
-      <appender-ref ref="CLOUD" />
-    </springProfile>
-    <springProfile name="local,test">
-      <appender-ref ref="STDOUT" />
-    </springProfile>
-  </root>
+  <springProfile name="local,test">
+    <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+      <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{35}) -
+          %msg %n
+        </pattern>
+      </encoder>
+    </appender>
+  </springProfile>
 
 </configuration>

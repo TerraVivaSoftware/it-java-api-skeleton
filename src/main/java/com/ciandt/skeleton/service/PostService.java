@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * This is the {@link Post}'s service layer.
- * The service layer is responsible for handling infrastructure code such as:
- * repository, cache, ftp, queue, sms, etc.
+ * This is the {@link Post}'s service layer. The service layer is responsible for handling
+ * infrastructure code such as: repository, cache, ftp, queue, sms, etc.
  *
  * @author mvidolin
  * @since Jul 29, 2019
@@ -29,6 +28,7 @@ public class PostService {
 
   /**
    * Search {@link Post}.
+   *
    * @return post {@link Post}
    */
   // TODO: filter by creation?
@@ -38,6 +38,7 @@ public class PostService {
 
   /**
    * Returns whether an entity with the given {@link UUID} exists.
+   *
    * @param uuid {@link UUID}
    * @return {@literal true} if an entity with the given id exists, {@literal false} otherwise.
    */
@@ -50,6 +51,7 @@ public class PostService {
 
   /**
    * Finds a {@link Post} by {@link UUID}.
+   *
    * @param uuid {@link UUID}
    * @return {@link Post}
    */
@@ -63,35 +65,36 @@ public class PostService {
 
   /**
    * Creates a {@link Post}.
-   * @param post
+   *
    * @return post
    */
   @Transactional
   public Post create(Post post) {
     // check "code" to ensure a creation (this is a infra check not a business validation).
     if (post.getCode() != null) {
-      throw new IllegalArgumentException("This comment could not be created. The comment already have a code.");
+      throw new IllegalArgumentException(
+          "This comment could not be created. The comment already have a code.");
     }
     return this.postResporitory.save(post);
   }
 
   /**
    * Updates a {@link Post}.
-   * @param post
+   *
    * @return post
    */
   @Transactional
   public Post update(Post post) {
     // check "code" to ensure an update (this is a infra check not a business validation).
     if (post.getCode() == null) {
-      throw new IllegalArgumentException("This comment could not be updated. The comment have no code.");
+      throw new IllegalArgumentException(
+          "This comment could not be updated. The comment have no code.");
     }
     return this.postResporitory.save(post);
   }
 
   /**
    * Deletes a {@link Post}.
-   * @param uuid
    */
   @Transactional
   public void delete(UUID uuid) {

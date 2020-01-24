@@ -42,6 +42,7 @@ public class PostRestController extends RestControllerBase {
 
   /**
    * Gets a {@link Post}.
+   *
    * @return ResponseEntity {@link PostUpdateResource}
    */
   @GetMapping(path = "/posts/{uuid}")
@@ -53,6 +54,7 @@ public class PostRestController extends RestControllerBase {
 
   /**
    * Gets a {@link Post}.
+   *
    * @return ResponseEntity {@link PostUpdateResource}
    */
   @GetMapping(path = "/posts")
@@ -64,6 +66,7 @@ public class PostRestController extends RestControllerBase {
 
   /**
    * Creates a {@link Post}.
+   *
    * @return ResponseEntity {@link PostUpdateResource}
    */
   @PostMapping(path = "/posts")
@@ -76,11 +79,13 @@ public class PostRestController extends RestControllerBase {
 
   /**
    * Updates a {@link Post}.
+   *
    * @return ResponseEntity {@link PostUpdateResource}
    */
   @PutMapping(path = "/posts/{uuid}")
   @ResponseResource(PostGetResource.class)
-  public ResponseEntity<?> update(@PathVariable UUID uuid, @RequestBody @Valid PostUpdateResource resource) {
+  public ResponseEntity<?> update(@PathVariable UUID uuid,
+      @RequestBody @Valid PostUpdateResource resource) {
     Post post = resource.toDomain();
     post.setUuid(uuid);
     post.setAuthor(this.currentUserUtil.getUser());
