@@ -14,8 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
 
 /**
- * GKE fluentd ingestion detective work:
- * https://cloud.google.com/error-reporting/docs/formatting-error-messages#json_representation
+ * GKE fluentd ingestion detective work: https://cloud.google.com/error-reporting/docs/formatting-error-messages#json_representation
  * http://google-cloud-python.readthedocs.io/en/latest/logging-handlers-container-engine.html
  * http://google-cloud-python.readthedocs.io/en/latest/_modules/google/cloud/logging/handlers/container_engine.html#ContainerEngineHandler.format
  * https://github.com/GoogleCloudPlatform/google-cloud-python/blob/master/logging/google/cloud/logging/handlers/_helpers.py
@@ -25,34 +24,11 @@ public class GCPCloudLoggingJSONLayout extends PatternLayout {
 
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  @Override
-  public String doLayout(ILoggingEvent event) {
-    String formattedMessage = super.doLayout(event);
-    return doLayoutInternal(formattedMessage, event);
-  }
-
-  /**
-   * For testing without having to deal wth the complexity of super.doLayout()
-   * Uses formattedMessage instead of event.getMessage()
-   */
-  private String doLayoutInternal(String formattedMessage, ILoggingEvent event) {
-    GCPCloudLoggingEvent gcpLogEvent =
-        new GCPCloudLoggingEvent(formattedMessage, convertTimestampToGCPLogTimestamp(event.getTimeStamp()),
-            mapLevelToGCPLevel(event.getLevel()), event.getThreadName());
-
-    try {
-      // Add a newline so that each JSON log entry is on its own line.
-      // Note that it is also important that the JSON log entry does not span multiple lines.
-      return objectMapper.writeValueAsString(gcpLogEvent) + "\n";
-    } catch (JsonProcessingException e) {
-      return "";
-    }
-  }
-
   private static GCPCloudLoggingEvent.GCPCloudLoggingTimestamp convertTimestampToGCPLogTimestamp(
       long millisSinceEpoch) {
     int nanos =
-        ((int) (millisSinceEpoch % 1000)) * 1_000_000; // strip out just the milliseconds and convert to nanoseconds
+        ((int) (millisSinceEpoch % 1000))
+            * 1_000_000; // strip out just the milliseconds and convert to nanoseconds
     long seconds = millisSinceEpoch / 1000L; // remove the milliseconds
     return new GCPCloudLoggingEvent.GCPCloudLoggingTimestamp(seconds, nanos);
   }
@@ -74,8 +50,39 @@ public class GCPCloudLoggingJSONLayout extends PatternLayout {
     }
   }
 
+  @Override
+  public String doLayout(ILoggingEvent event) {
+    String formattedMessage = super.doLayout(event);
+    return doLayoutInternal(formattedMessage, event);
+  }
+
+  /**
+   * For testing without having to deal wth the complexity of super.doLayout() Uses formattedMessage
+   * instead of event.getMessage()
+   */
+  private String doLayoutInternal(String formattedMessage, ILoggingEvent event) {
+    GCPCloudLoggingEvent gcpLogEvent =
+        new GCPCloudLoggingEvent(formattedMessage,
+            convertTimestampToGCPLogTimestamp(event.getTimeStamp()),
+            mapLevelToGCPLevel(event.getLevel()), event.getThreadName());
+
+    try {
+      // Add a newline so that each JSON log entry is on its own line.
+      // Note that it is also important that the JSON log entry does not span multiple lines.
+      return objectMapper.writeValueAsString(gcpLogEvent) + "\n";
+    } catch (JsonProcessingException e) {
+      return "";
+    }
+  }
+
+  @Override
+  public Map<String, String> getDefaultConverterMap() {
+    return PatternLayout.defaultConverterMap;
+  }
+
   /* Must be public for Jackson JSON conversion */
   public static class GCPCloudLoggingEvent {
+
     private String message;
     private GCPCloudLoggingTimestamp timestamp;
     private String thread;
@@ -124,6 +131,7 @@ public class GCPCloudLoggingJSONLayout extends PatternLayout {
 
     /* Must be public for JSON marshalling logic */
     public static class GCPCloudLoggingTimestamp {
+
       private long seconds;
       private int nanos;
 
@@ -150,10 +158,5 @@ public class GCPCloudLoggingJSONLayout extends PatternLayout {
       }
 
     }
-  }
-
-  @Override
-  public Map<String, String> getDefaultConverterMap() {
-    return PatternLayout.defaultConverterMap;
   }
 }

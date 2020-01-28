@@ -1,4 +1,4 @@
-package com.ciandt.skeleton.web.util;
+package com.ciandt.skeleton.web.rest.util;
 
 import com.ciandt.skeleton.data.entity.UserEntity;
 import org.springframework.context.annotation.Scope;
@@ -11,6 +11,7 @@ public class CurrentUserUtil {
 
   /**
    * Gets the current user from request.
+   *
    * @return User
    */
   public UserEntity getUser() {

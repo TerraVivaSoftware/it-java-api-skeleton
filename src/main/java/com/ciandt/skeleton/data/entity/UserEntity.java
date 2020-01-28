@@ -11,6 +11,7 @@ import org.hibernate.annotations.Type;
 
 /**
  * This class represents a blog's user.
+ *
  * @author mvidolin
  * @since Jul 29, 2019
  */
@@ -24,7 +25,7 @@ public class UserEntity {
   @Column(name = "USER_TX_LOGIN")
   private String login;
 
-  @Type(type="org.hibernate.type.UUIDCharType")
+  @Type(type = "org.hibernate.type.UUIDCharType")
   @Column(name = "USER_CD_UUID", unique = true, updatable = false)
   private UUID uuid;
 
