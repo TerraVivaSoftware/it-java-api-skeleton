@@ -47,19 +47,10 @@ dependencies {
 //	compile files('libs/ojdbc7.jar')
     compile('com.h2database:h2:1.4.200')
 
-<<<<<<< HEAD
-	// Utils
-	// https://mvnrepository.com/artifact/net.sf.dozer/dozer
-	compile 'com.github.dozermapper:dozer-core:6.5.0'
-	compile 'com.vidolima:ditiow:0.2.2'
-	compileOnly 'org.projectlombok:lombok:1.18.8'
-	annotationProcessor 'org.projectlombok:lombok:1.18.8'
-=======
     // Utils
     compile 'com.vidolima:ditiow:0.2.2'
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
->>>>>>> 76fb19f786703d2598b44481f28d34b2f41233fe
 
     // Swagger
     compile('io.springfox:springfox-swagger2:2.9.2')
