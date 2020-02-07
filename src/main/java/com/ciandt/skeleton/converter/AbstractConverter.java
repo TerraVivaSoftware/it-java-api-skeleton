@@ -24,7 +24,7 @@ public class AbstractConverter<D, E> implements Converter<D, E> {
         .getGenericSuperclass()).getActualTypeArguments()[0]);
 
     this.entityClass = ((Class<E>) ((ParameterizedType) getClass()
-        .getGenericSuperclass()).getActualTypeArguments()[0]);
+        .getGenericSuperclass()).getActualTypeArguments()[1]);
   }
 
   public D toDomain(E entity) {
